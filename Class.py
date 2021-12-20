@@ -72,11 +72,9 @@ class Sleep:
         return np.abs(hilbert(array))
     
     def preprocessing_and_ae(self):
-        notch_f1 = 51
-        notch_f2 = 102.5
+        notch_f = 50
         print(self.raw_data_psg.shape)
-        new_sig = notch_filter(self.raw_data_psg[self.ind], notch_f1, 5, fs=self.fs)
-        new_sig = notch_filter(new_sig, notch_f2, 5, fs=self.fs)
+        new_sig = notch_filter(self.raw_data_psg[self.ind], notch_f, 5, fs=self.fs)
         new_sig = butter_bandpass_filter(new_sig, self.low_cut, self.high_cut, fs=self.fs, order=5)
         new_sig = self.amp_envelope(new_sig)
         label_0 = bad_label(new_sig)
@@ -158,7 +156,7 @@ class Sleep:
         
        
         
-edf_file_loc = r'C:\Users\lina3953\Desktop\surrey\001\N1\SRC-003_SRC-003_V1_N1_001_(1).edf'
+edf_file_loc = ''   #the edf file location containing the recorded time-series signal
 raw = mne.io.read_raw_edf(edf_file_loc)
 raw_data_psg = raw.get_data()
 raw_data_psg = np.array(raw_data_psg)
@@ -167,8 +165,7 @@ sleep = Sleep(raw_data_psg)
 sleep.fs = 256
 sleep.low_cut = 1
 sleep.high_cut = 4
-#sleep.file_psg = r'C:\Users\lina3953\Desktop\surrey\001\N1\SRC-003_SRC-003_V1_N1_001_(1).edf'
-sleep.hypnogram_file = r'C:\Users\lina3953\Desktop\surrey\001\N1\SRC-003 SRC-003_V1_N1_001 - 04.08.2021_PSG\SRC-003 SRC-003_V1_N1_001 - 04.08.2021\Sleep profile.txt'
+sleep.hypnogram_file = ''   #expert labeled file location
 history, x_test, y_test = sleep.train()
 sleep.plot_roc(history, x_test, y_test)    
 

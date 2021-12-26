@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Dec 20 16:32:19 2021
-
-@author: lina3953
-"""
 
 from scipy import signal
 from scipy.fft import rfft, rfftfreq

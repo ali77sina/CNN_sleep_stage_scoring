@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Dec 20 16:33:55 2021
-
-@author: lina3953
-"""
 import numpy as np
 import mne
 from scipy.signal import hilbert, chirp
